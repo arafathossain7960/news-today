@@ -23,11 +23,14 @@ const displayCategories =(newsCategories)=>{
 }
 
  const  targetNews = async (id)=>{
+    toggleSpinner(true);
      const res = await  fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
      const data = await res.json();
     displayNews(data.data)
+    
 }
 const displayNews =(allSews)=>{
+ 
     const newsContainer = document.getElementById('news-container');
     if(allSews.length !== 0){
         getId('total-item').innerText = 'Total item found : '+ allSews.length;
@@ -81,7 +84,9 @@ const displayNews =(allSews)=>{
       </div>
         
         `;
+       
         newsContainer.appendChild(newsDiv);
+       
         
     // modal area 
     news.title?getId('title').innerText = news.title: getId('title').innerText='Title not found';
@@ -92,7 +97,7 @@ const displayNews =(allSews)=>{
         
     });
 
-
+    toggleSpinner(false);
    
 }
 
@@ -112,12 +117,13 @@ const getId=(id)=>{
    return tag;
 }
 
-//   type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+const toggleSpinner = (isLoading)=>{
+    if(isLoading){
+        document.getElementById('spinner').classList.remove('d-none');
+    }else{
+        document.getElementById('spinner').classList.add('d-none');
+    }
+}
 
 
 
-// modal function 
-
-
-
-  
