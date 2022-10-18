@@ -37,10 +37,11 @@ const displayCategories =(newsCategories)=>{
 }
 const displayNews =(allSews)=>{
     const newsContainer = document.getElementById('news-container');
+document.getElementById('total-item').innerText = 'Total item found : '+ allSews.length;
     newsContainer.textContent = '';
 
     allSews.forEach(news=>{
-        console.log(news._id)
+    
         const newsDiv = document.createElement('div');
         const cha100 = news.details.slice(0,150);
         const cha200 = news.details.slice(151,300);
@@ -71,6 +72,7 @@ const displayNews =(allSews)=>{
               <p>Rating:  ${news.rating.number }</p>
               
               <button
+              onclick="getModalButton(${id})"
               type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
               class="btn btn-primary"
              >
@@ -84,8 +86,18 @@ const displayNews =(allSews)=>{
         
         `;
         newsContainer.appendChild(newsDiv);
+        
+    // modal area 
+    news.title?getId('title').innerText = news.title: getId('title').innerText='Title not found';
+    news.author.name?getId('modal-author').innerText= "Author :"+ news.author.name:getId('modal-author').innerText= 'Author name not available' ;
+
+    news.total_view?getId('views').innerText= 'Total views :'+ news.total_view :getId('views').innerText = 'Views not found'; 
+
+        
     });
 
+
+   
 }
 
 /// modal function 
@@ -97,6 +109,19 @@ const displayNews =(allSews)=>{
 
 loadCategories();
 
+// common function for get ID
 
+const getId=(id)=>{
+   const tag = document.getElementById(id);
+   return tag;
+}
 
 //   type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+
+
+
+// modal function 
+
+
+
+  
