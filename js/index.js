@@ -25,19 +25,15 @@ const displayCategories =(newsCategories)=>{
  const  targetNews = async (id)=>{
      const res = await  fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
      const data = await res.json();
-     const notFound =  document.getElementById('notFound');
-
-     if(data.status === true){
-        notFound.classList.add('d-none')
-     }else{
-        notFound.classList.add('d-block')
-     }
     displayNews(data.data)
-  
 }
 const displayNews =(allSews)=>{
     const newsContainer = document.getElementById('news-container');
-document.getElementById('total-item').innerText = 'Total item found : '+ allSews.length;
+    if(allSews.length !== 0){
+        getId('total-item').innerText = 'Total item found : '+ allSews.length;
+    }else{
+        getId('total-item').innerText= 'Item not found';
+    }
     newsContainer.textContent = '';
 
     allSews.forEach(news=>{
