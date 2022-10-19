@@ -24,8 +24,12 @@ const displayCategories =(newsCategories)=>{
 
  const  targetNews = async (id)=>{
     toggleSpinner(true);
-     const res = await  fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
-     const data = await res.json();
+   try{
+    const res = await  fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
+    const data = await res.json();
+   }catch{
+    console.log(error)
+   }
     displayNews(data.data)
     
 }
