@@ -27,10 +27,11 @@ const displayCategories =(newsCategories)=>{
    try{
     const res = await  fetch(`https://openapi.programming-hero.com/api/news/category/0${id}`)
     const data = await res.json();
+    displayNews(data.data)
    }catch{
     console.log(error)
    }
-    displayNews(data.data)
+    
     
 }
 const displayNews =(allSews)=>{
